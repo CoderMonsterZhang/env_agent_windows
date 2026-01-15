@@ -1,0 +1,40 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*' # e.g. v1.0.0, v1.1.0
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore EnvVarManager.csproj
+
+      - name: Publish
+        run: dotnet publish EnvVarManager.csproj -c Release -o out
+
+      # 打包发布文件（可选，如果你想打成 zip）
+      - name: Archive build output
+        run: |
+          powershell Compress-Archive -Path out\\* -DestinationPath EnvVarManager.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            EnvVarManager.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
