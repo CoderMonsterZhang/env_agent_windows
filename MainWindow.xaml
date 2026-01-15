@@ -42,9 +42,10 @@
                 <StackPanel Orientation="Horizontal"
                             Grid.Column="1"
                             VerticalAlignment="Center"
-                            HorizontalAlignment="Right"
-                            Spacing="8">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Margin="0,0,8,0">
                         <TextBlock Text="作用域：" VerticalAlignment="Center" Margin="0,0,6,0" />
                         <ComboBox x:Name="ScopeComboBox"
                                   Width="160"
@@ -71,25 +72,26 @@
             <!-- 操作按钮条 -->
             <DockPanel Margin="0,0,0,8">
                 <StackPanel Orientation="Horizontal"
-                            DockPanel.Dock="Left"
-                            Spacing="8">
+                            DockPanel.Dock="Left">
                     <Button Content="新增变量"
                             Style="{StaticResource PrimaryButtonStyle}"
-                            Click="AddButton_Click" />
+                            Click="AddButton_Click"
+                            Margin="0,0,8,0" />
                     <Button Content="编辑选中"
                             Style="{StaticResource SecondaryButtonStyle}"
-                            Click="EditButton_Click" />
+                            Click="EditButton_Click"
+                            Margin="0,0,8,0" />
                     <Button Content="删除选中"
                             Style="{StaticResource DangerButtonStyle}"
                             Click="DeleteButton_Click" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal"
-                            DockPanel.Dock="Right"
-                            Spacing="8">
+                            DockPanel.Dock="Right">
                     <Button Content="备份到 JSON"
                             Style="{StaticResource SecondaryButtonStyle}"
-                            Click="BackupButton_Click" />
+                            Click="BackupButton_Click"
+                            Margin="0,0,8,0" />
                     <Button Content="从 JSON 恢复"
                             Style="{StaticResource SecondaryButtonStyle}"
                             Click="RestoreButton_Click" />
