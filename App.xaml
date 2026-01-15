@@ -1,0 +1,131 @@
+<Application x:Class="EnvVarManager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- 调色板 -->
+        <Color x:Key="PrimaryColor">#2563EB</Color>
+        <Color x:Key="PrimaryDarkColor">#1D4ED8</Color>
+        <Color x:Key="PrimaryLightColor">#DBEAFE</Color>
+        <Color x:Key="DangerColor">#DC2626</Color>
+        <Color x:Key="NeutralBorderColor">#E5E7EB</Color>
+        <Color x:Key="NeutralBackground">#F9FAFB</Color>
+        <Color x:Key="NeutralForeground">#111827</Color>
+        <Color x:Key="SubtleForeground">#6B7280</Color>
+
+        <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+        <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDarkColor}" />
+        <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLightColor}" />
+        <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
+        <SolidColorBrush x:Key="NeutralBorderBrush" Color="{StaticResource NeutralBorderColor}" />
+        <SolidColorBrush x:Key="NeutralBackgroundBrush" Color="{StaticResource NeutralBackground}" />
+        <SolidColorBrush x:Key="NeutralForegroundBrush" Color="{StaticResource NeutralForeground}" />
+        <SolidColorBrush x:Key="SubtleForegroundBrush" Color="{StaticResource SubtleForeground}" />
+
+        <Style x:Key="AppWindowStyle" TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource NeutralBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource NeutralForegroundBrush}" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <!-- 主按钮 -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="14,6" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryDarkBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1E3A8A" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#E5E7EB" />
+                                <Setter Property="Foreground" Value="#9CA3AF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 次要按钮 -->
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="{StaticResource NeutralForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource NeutralBorderBrush}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EFF6FF" />
+                    <Setter Property="BorderBrush" Value="{StaticResource PrimaryLightBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- 危险按钮 -->
+        <Style x:Key="DangerButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+            <Setter Property="Background" Value="{StaticResource DangerBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}" />
+        </Style>
+
+        <!-- DataGrid 美化 -->
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="{StaticResource NeutralBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="RowBackground" Value="White" />
+            <Setter Property="AlternatingRowBackground" Value="#F3F4F6" />
+            <Setter Property="GridLinesVisibility" Value="Vertical" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#E5E7EB" />
+            <Setter Property="VerticalGridLinesBrush" Value="#E5E7EB" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="CanUserDeleteRows" Value="False" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F3F4F6" />
+            <Setter Property="Foreground" Value="{StaticResource SubtleForegroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource NeutralBorderBrush}" />
+            <Setter Property="BorderThickness" Value="0,0,1,1" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="10,6" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="6" />
+            <Setter Property="BorderBrush" Value="{StaticResource NeutralBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="BorderBrush" Value="{StaticResource NeutralBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </Application.Resources>
+</Application>
+
+
